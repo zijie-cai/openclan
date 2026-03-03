@@ -1,11 +1,6 @@
 <p align="center">
-  <img src="assets/shell_lg.png" width="80" />
-</p>
-
-<h1 align="center">OpenCLAN</h1>
-
-<p align="center">
-  AI-assisted linguistic analysis for CHAT transcripts.
+  <img src="assets/clam.png" width="40" style="vertical-align: middle;" />
+  <strong style="font-size: 28px; vertical-align: middle;">OpenCLAN</strong> — AI-assisted linguistic analysis for CHAT transcripts.
 </p>
 
 <p align="center">
