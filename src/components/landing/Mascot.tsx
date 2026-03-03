@@ -30,7 +30,7 @@ export const Mascot: React.FC<{ className?: string }> = ({ className }) => {
         onKeyDown={handleKeyDown}
       >
         <svg
-          className="w-full h-full overflow-visible animate-float"
+          className="w-full h-full overflow-visible"
           viewBox="-40 -40 280 280"
           role="img"
           aria-labelledby="mascotTitle mascotDesc"

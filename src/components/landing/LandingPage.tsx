@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Mascot } from './Mascot';
 import { useAppStore } from '../../store/useAppStore';
@@ -9,6 +9,51 @@ import { Logo } from '../ui/Logo';
 export const LandingPage: React.FC = () => {
   const { startApp } = useAppStore();
   const [isMascotHovered, setIsMascotHovered] = useState(false);
+  const [isPageReady, setIsPageReady] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // Keep every fresh load consistent by starting at the top of the landing page.
+    const previousScrollRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = 'manual';
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+
+    const rafId = window.requestAnimationFrame(() => {
+      setIsPageReady(true);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+      window.history.scrollRestoration = previousScrollRestoration;
+    };
+  }, []);
+
+  const heroVariants = {
+    hidden: { opacity: 0, y: 24 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.16, 1, 0.3, 1],
+        when: 'beforeChildren',
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const heroItemVariants = {
+    hidden: { opacity: 0, y: 16 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.55,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
 
   const features = [
     {
@@ -52,13 +97,14 @@ export const LandingPage: React.FC = () => {
       <main className="relative z-10 flex flex-col items-center px-4 pt-12 pb-4 max-w-6xl mx-auto">
         
         {/* Hero Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        <motion.div
+          variants={heroVariants}
+          initial="hidden"
+          animate={isPageReady ? 'show' : 'hidden'}
           className="flex flex-col items-center text-center max-w-3xl"
         >
-          <motion.div 
+          <motion.div
+            variants={heroItemVariants}
             className="flex flex-col items-center mb-0 relative z-20 cursor-pointer"
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -68,20 +114,23 @@ export const LandingPage: React.FC = () => {
             <Mascot className="scale-90 sm:scale-100 drop-shadow-[0_0_25px_rgba(6,182,212,0.3)]" />
           </motion.div>
           
-          <h1 className="text-6xl sm:text-8xl font-extrabold tracking-tighter -mt-6 mb-8 bg-gradient-to-r from-cyan-400 via-blue-400 to-[#FFD166] bg-[length:200%_auto] animate-gradient-x bg-clip-text text-transparent relative z-10">
+          <motion.h1
+            variants={heroItemVariants}
+            className="text-6xl sm:text-8xl font-extrabold tracking-tighter -mt-6 mb-8 bg-gradient-to-r from-cyan-400 via-blue-400 to-[#FFD166] bg-[length:200%_auto] animate-gradient-x bg-clip-text text-transparent relative z-10"
+          >
             OpenCLAN
-          </h1>
+          </motion.h1>
 
-          <div className="relative h-6 sm:h-8 mb-12 mt-4 w-full flex items-center justify-center">
+          <motion.div variants={heroItemVariants} className="relative h-6 sm:h-8 mb-12 mt-4 w-full flex items-center justify-center">
             <p className={`absolute text-sm sm:text-base font-bold tracking-[0.2em] text-cyan-400 uppercase transition-all duration-500 ease-out ${isMascotHovered ? "opacity-0 translate-y-4 scale-90 blur-sm" : "opacity-100 translate-y-0 scale-100 blur-0"}`}>
               The AI that analyzes language.
             </p>
             <p className={`absolute text-sm sm:text-base font-black tracking-[0.3em] text-[#FFD166] uppercase drop-shadow-[0_0_15px_rgba(255,209,102,0.8)] animate-shake transition-all duration-500 ease-out ${isMascotHovered ? "opacity-100 translate-y-0 scale-110 blur-0" : "opacity-0 -translate-y-4 scale-90 blur-sm"}`}>
               PEARL! PEARL!
             </p>
-          </div>
+          </motion.div>
 
-          <div className="space-y-4 text-lg sm:text-xl font-medium text-slate-300 mb-10 flex flex-col items-center">
+          <motion.div variants={heroItemVariants} className="space-y-4 text-lg sm:text-xl font-medium text-slate-300 mb-10 flex flex-col items-center">
             <p className="flex items-center justify-center gap-2">
               Generates <span className="font-mono text-cyan-300 bg-cyan-950/50 px-2 py-0.5 rounded">.cha</span> transcripts.
             </p>
@@ -90,19 +139,21 @@ export const LandingPage: React.FC = () => {
             </p>
             <p>Computes MLU, TTR, FREQ.</p>
             <p className="text-cyan-400 font-semibold mt-2">All from audio you upload.</p>
-          </div>
+          </motion.div>
 
-          <p className="text-slate-400 mb-10">
+          <motion.p variants={heroItemVariants} className="text-slate-400 mb-10">
             Modern CLAN. Fully editable. Fully compatible.
-          </p>
+          </motion.p>
 
-          <Button 
-            onClick={startApp}
-            size="lg"
-            className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-lg px-8 py-6 rounded-full shadow-[0_0_40px_-10px_rgba(6,182,212,0.5)] transition-all hover:shadow-[0_0_60px_-10px_rgba(6,182,212,0.7)] hover:-translate-y-1"
-          >
-            Try Early Beta <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <motion.div variants={heroItemVariants}>
+            <Button 
+              onClick={startApp}
+              size="lg"
+              className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-lg px-8 py-6 rounded-full shadow-[0_0_40px_-10px_rgba(6,182,212,0.5)] transition-all hover:shadow-[0_0_60px_-10px_rgba(6,182,212,0.7)] hover:-translate-y-1"
+            >
+              Try Early Beta <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </motion.div>
         </motion.div>
 
         {/* Features Grid */}
