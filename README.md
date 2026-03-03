@@ -20,7 +20,7 @@ If you want a streamlined, AI-assisted workflow for CLAN-style analysis — this
 
 ---
 
-🚀 **Try the Early Beta:** [OpenCLAN](https://ai.studio/apps/9b244172-1d53-4f78-85ad-5387a9113d6e?fullscreenApplet=true)
+🚀 **Try the Early Beta:** [OpenCLAN](https://zijie-cai.github.io/openclan/)
 
 ---
 
