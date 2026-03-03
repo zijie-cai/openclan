@@ -20,8 +20,7 @@ If you want a streamlined, AI-assisted workflow for CLAN-style analysis — this
 
 ---
 
-🚀 **Try the Early Beta:** Coming soon...
-
+🚀 **Try the Early Beta:** [Coming Soon...](https://openclan.ai)
 ---
 
 ## Why OpenCLAN?
