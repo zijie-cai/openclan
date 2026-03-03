@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/clam.png" width="40" style="vertical-align: middle;" />
+  <img src="assets/shell_lg.png" width="40" style="vertical-align: middle;" />
   <strong style="font-size: 28px; vertical-align: middle;">OpenCLAN</strong> — AI-assisted linguistic analysis for CHAT transcripts.
 </p>
 
