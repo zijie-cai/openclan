@@ -20,9 +20,7 @@ If you want a streamlined, AI-assisted workflow for CLAN-style analysis — this
 
 ---
 
-🌐 **Website:** https://openclan.ai  
-📖 **Documentation:** https://openclan.ai/docs  
-🧪 **Live Demo:** https://openclan.ai/demo  
+🚀 **Try the Early Beta:** Coming soon...
 
 ---
 
