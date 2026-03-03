@@ -3,6 +3,15 @@ import { Patient, Session, Utterance, CommandResult } from '../types';
 import { MOCK_PATIENTS } from '../lib/mockData';
 import { transcribeAudio } from '../services/transcriptionService';
 
+const normalizeApiKey = (raw: string): string => {
+  return raw
+    .replace(/[\u200B-\u200D\uFEFF]/g, '') // remove hidden zero-width chars
+    .replace(/\s+/g, '') // remove spaces/newlines from pasted values
+    .replace(/^['"]|['"]$/g, '') // remove accidental wrapping quotes
+    .replace(/^Bearer/i, '')
+    .trim();
+};
+
 interface AppState {
   isLandingPage: boolean;
   patients: Patient[];
@@ -62,7 +71,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   processingProgress: 0,
   isConsoleOpen: false,
   isSettingsOpen: false,
-  geminiApiKey: typeof window !== 'undefined' ? localStorage.getItem('openclan_gemini_api_key') || '' : '',
+  geminiApiKey: typeof window !== 'undefined' ? normalizeApiKey(localStorage.getItem('openclan_gemini_api_key') || '') : '',
   batchQueue: [],
   history: [],
 
@@ -89,11 +98,11 @@ export const useAppStore = create<AppState>((set, get) => ({
   toggleSettings: () => set((state) => ({ isSettingsOpen: !state.isSettingsOpen })),
 
   setGeminiApiKey: (apiKey) => {
-    const trimmed = apiKey.trim();
+    const normalized = normalizeApiKey(apiKey);
     if (typeof window !== 'undefined') {
-      localStorage.setItem('openclan_gemini_api_key', trimmed);
+      localStorage.setItem('openclan_gemini_api_key', normalized);
     }
-    set({ geminiApiKey: trimmed });
+    set({ geminiApiKey: normalized });
   },
 
   clearGeminiApiKey: () => {
@@ -433,7 +442,8 @@ export const useAppStore = create<AppState>((set, get) => ({
     } catch (error) {
       console.error("Failed to process audio:", error);
       set({ isProcessingAudio: false, processingProgress: 0 });
-      alert("Failed to transcribe audio. Please check your API key and try again.");
+      const message = error instanceof Error ? error.message : String(error ?? 'Unknown error');
+      alert(`Failed to transcribe audio: ${message}`);
     }
   },
 
