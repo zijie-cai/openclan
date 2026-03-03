@@ -1,5 +1,5 @@
 <h1>
-  <img src="assets/shell_lg.png" width="44" style="vertical-align: -8px; margin-right: 10px;" />
+  <img src="assets/shell_lg.png" width="46" style="vertical-align: -10px; margin-right: 12px;" />
   OpenCLAN — AI-Assisted CLAN for SLP Research
 </h1>
 
