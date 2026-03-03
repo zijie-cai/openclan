@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/shell-lg.png" width="80" />
+  <img src="assets/shell_lg.png" width="80" />
 </p>
 
 <h1 align="center">OpenCLAN</h1>
