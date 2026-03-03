@@ -1,7 +1,7 @@
-<p align="center">
-  <img src="assets/shell_lg.png" width="40" style="vertical-align: middle;" />
-  <strong style="font-size: 28px; vertical-align: middle;">OpenCLAN</strong> — AI-assisted linguistic analysis for CHAT transcripts.
-</p>
+<h1 align="left">
+  <img src="assets/shell_lg.png" width="32" style="vertical-align: middle; margin-right: 8px;" />
+  OpenCLAN — AI-Assisted CLAN for SLP Research
+</h1>
 
 <p align="center">
   <img src="oc-lg.png" alt="OpenCLAN Banner" width="720" />
