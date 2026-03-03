@@ -5,5 +5,5 @@
 </h1>
 
 <p align="center">
-  <img src="assets/oc-lg.png" alt="OpenCLAN Banner" width="600" />
+  <img src="assets/oc-lg.png" alt="OpenCLAN Banner" width="520" />
 </p>
