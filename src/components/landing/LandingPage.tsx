@@ -14,6 +14,8 @@ export const LandingPage: React.FC = () => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
+    document.documentElement.classList.add('landing-page');
+
     // Keep every fresh load consistent by starting at the top of the landing page.
     const previousScrollRestoration = window.history.scrollRestoration;
     window.history.scrollRestoration = 'manual';
@@ -26,6 +28,7 @@ export const LandingPage: React.FC = () => {
     return () => {
       window.cancelAnimationFrame(rafId);
       window.history.scrollRestoration = previousScrollRestoration;
+      document.documentElement.classList.remove('landing-page');
     };
   }, []);
 
